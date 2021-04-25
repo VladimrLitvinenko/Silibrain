@@ -33,7 +33,7 @@ class TestStartPage(BaseTest):
         email_input_field.send_keys("v.litvinenko+admin3@geniusee.com")
 
         # enter valid password
-        password_input_field = drддiver.find_element(by=By.XPATH, value="//input[@name='password']")
+        password_input_field = driver.find_element(by=By.XPATH, value="//input[@name='password']")
         password_input_field.send_keys("12341234")
 
         # Click on Sign in
@@ -129,5 +129,24 @@ class TestStartPage(BaseTest):
                                                     value="//p[contains(text(),'El enlace se envió a su correo electrónico permiti')]")
         assert success_reset_message.text == "El enlace se envió a su correo electrónico permitiendo configurar su contraseña"
 
-    def test_print(self, setup):
-        assert 1 == 1
+    def test_upper_case_login(self, setup):
+        driver = setup
+        # click ingressa button
+        ingresa_button = driver.find_element(by=By.XPATH, value="//span[text()='Ingresa']")
+        ingresa_button.click()
+
+        # enter valid login
+        email_input_field = driver.find_element(by=By.XPATH, value="//input[@name='email']")
+        email_input_field.send_keys("V.LITVINENENKO+admin@geniusee.com")
+
+        # enter valid password
+        password_input_field = driver.find_element(by=By.XPATH, value="//input[@name='password']")
+        password_input_field.send_keys("12341234")
+        # Click on Sign in
+        sign_in_button = driver.find_element(by=By.XPATH, value="//span[text()='Ingresa']")
+        sign_in_button.click()
+
+        # Verify the error email is displayed on the page
+        disabled_email_field = driver.find_element(by=By.XPATH,
+                                                   value="//input[@value='v.litvinenko+admin@geniusee.com']")
+        assert disabled_email_field.get_attribute('value') == "v.litvinenko+admin@geniusee.com"
