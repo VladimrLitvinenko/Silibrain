@@ -1,8 +1,12 @@
 import logging
 
+import pytest
 from selenium.webdriver.common.by import By
 
 from constants import login_constants
+
+"""Для всего класса теперь будет действовать setup fixture"""
+
 
 
 class LoginPage:
@@ -26,7 +30,8 @@ class LoginPage:
         assert email_error_message.text == "Usuario no encontrado"
 
     def verify_invalid_password_error(self):
-        password_error_message = self.driver.find_element(by=By.XPATH, value=login_constants.LOGIN_PASSWORD_ERROR_MESSAGE)
+        password_error_message = self.driver.find_element(by=By.XPATH,
+                                                          value=login_constants.LOGIN_PASSWORD_ERROR_MESSAGE)
         assert password_error_message.text == "Credenciales no validas"
 
     def verify_success_login(self, email):
@@ -48,11 +53,11 @@ class LoginPage:
         reset_button.click()
 
     def error_message_invalid_forgot_email(self):
-        user_in_nof_found_message = self.driver.find_element(by=By.XPATH, value=login_constants.FORGOT_PAGE_USER_NOT_FOUND_MESSAGE)
+        user_in_nof_found_message = self.driver.find_element(by=By.XPATH,
+                                                             value=login_constants.FORGOT_PAGE_USER_NOT_FOUND_MESSAGE)
         assert user_in_nof_found_message.text == "Usuario no encontrado"
 
     def verify_password_is_reset(self):
-        success_reset_message = self.driver.find_element(by=By.XPATH, value=login_constants.FORGOT_PAGE_SUCCESS_RESET_MESSAGE)
+        success_reset_message = self.driver.find_element(by=By.XPATH,
+                                                         value=login_constants.FORGOT_PAGE_SUCCESS_RESET_MESSAGE)
         assert success_reset_message.text == "El enlace se envió a su correo electrónico permitiendo configurar su contraseña"
-
-
