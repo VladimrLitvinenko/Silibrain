@@ -13,7 +13,6 @@ class LoginPage:
         self.driver = driver
         self.logger = logging.getLogger(__name__)
 
-
     def fill_login_fields(self, email, password):
         # enter login
         email_input_field = self.driver.find_element(by=By.XPATH, value=login_constants.LOGIN_EMAIL_INPUT_FIELD)
@@ -31,7 +30,6 @@ class LoginPage:
     def verify_invalid_email_error(self):
         email_error_message = self.driver.find_element(by=By.XPATH, value=login_constants.LOGIN_EMAIL_ERROR_MESSAGE)
         assert email_error_message.text == "Usuario no encontrado"
-
 
     def verify_invalid_password_error(self):
         password_error_message = self.driver.find_element(by=By.XPATH,

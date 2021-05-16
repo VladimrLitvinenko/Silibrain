@@ -11,7 +11,6 @@ from pages.profile_page import ProfilePage
 class TestUserProfilePage(BaseTest):
     """Test for user profile page"""
 
-
     def test_all_fields_are_disabled_by_default(self):
         """
         - Login as admin
@@ -33,19 +32,19 @@ class TestUserProfilePage(BaseTest):
 
         """Clear all editable fields"""
         time.sleep(2)
+
         self.driver.find_element(By.XPATH, value=profile_constants.PROFILE_FIRST_NAME_FIELD).clear()
         self.driver.find_element(By.XPATH, value=profile_constants.PROFILE_LAST_NAME_FIELD).clear()
         self.driver.find_element(By.XPATH, value=profile_constants.PROFILE_PHONE_NUMBER_FIELD).clear()
 
         """Input FIRST NAME, LAST NAME, PHONE"""
-        profile_page_obj.input_text_into_fields(first_name=profile_constants.FIRST_NAME_INPUT, last_name=profile_constants.LAST_NAME_INPUT, phone=profile_constants.PHONE_INPUT)
+        profile_page_obj.input_text_into_fields(first_name=profile_constants.FIRST_NAME_INPUT,
+                                                last_name=profile_constants.LAST_NAME_INPUT,
+                                                phone=profile_constants.PHONE_INPUT)
         profile_page_obj.click_save_button()
         #
         # print(self.driver.find_element(By.XPATH, value=profile_constants.FIRST_NAME_INPUT).get_attribute("value"), "GGGG", profile_constants.FIRST_NAME_INPUT)
         # assert self.driver.find_element(By.XPATH, value=profile_constants.FIRST_NAME_INPUT).get_attribute("value") == profile_constants.FIRST_NAME_INPUT
-
-
-
 
     # def test_all_fields_are_not_required(self):
     #     """
