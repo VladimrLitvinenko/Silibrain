@@ -8,11 +8,11 @@ from constants import login_constants
 """Для всего класса теперь будет действовать setup fixture"""
 
 
-
 class LoginPage:
     def __init__(self, driver):
         self.driver = driver
         self.logger = logging.getLogger(__name__)
+
 
     def fill_login_fields(self, email, password):
         # enter login
@@ -25,9 +25,13 @@ class LoginPage:
         sign_in_button = self.driver.find_element(by=By.XPATH, value=login_constants.INGRESSA_BUTTON_LOGIN_PAGE)
         sign_in_button.click()
 
+    def login_as_admin(self):
+        self.fill_login_fields(email=login_constants.ADMIN_LOGIN, password=login_constants.ADMIN_PASSWORD)
+
     def verify_invalid_email_error(self):
         email_error_message = self.driver.find_element(by=By.XPATH, value=login_constants.LOGIN_EMAIL_ERROR_MESSAGE)
         assert email_error_message.text == "Usuario no encontrado"
+
 
     def verify_invalid_password_error(self):
         password_error_message = self.driver.find_element(by=By.XPATH,

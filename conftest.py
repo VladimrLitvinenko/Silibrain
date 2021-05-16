@@ -6,16 +6,34 @@ from selenium.webdriver.common.by import By
 from constants import login_constants
 from pages.login_page import LoginPage
 
+
 def pytest_runtest_setup(item):
     """prepare test"""
     log = logging.getLogger(item.name)
     item.cls.logger = log
 
+def pytest_addoption(parser):
+    """
+    --browser_name  - ключ который мы пишем в команде перед наименованием браузера. Пример: py.test --browser_name firefox
+    default="chrome" - означает что по умолчанию будет ранится хроме если мы не указали наименование браузера
+    """
+    parser.addoption(
+        "--browser_name", action="store", default="chrome"
+    )
 
 @pytest.fixture(scope="function")
+
 def setup(request):
-    driver = webdriver.Chrome(
-        executable_path="/home/ihor/PycharmProjects/pythonQALightSelenium/drivers/chromedriver")
+    """
+    Теперь если мы можем запускать комманду с наимнованием нужного нам браузера для рана:
+     py.test --browser_name firefox
+     py.test --browser_name chrome
+    """
+    browser_name = request.config.getoption("browser_name")
+    if browser_name == "chrome":
+        driver = webdriver.Chrome(executable_path="/home/ihor/PycharmProjects/Silibrain/driver/chromedriver")
+    elif browser_name == "firefox":
+        driver = webdriver.Firefox(executable_path="/home/ihor/PycharmProjects/Silibrain/driver/geckodriver")
     # Open start page
     driver.get(login_constants.STAGE_BASE_URL)
     driver.implicitly_wait(time_to_wait=20)
