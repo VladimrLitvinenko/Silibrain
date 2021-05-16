@@ -17,7 +17,7 @@ FORGOT_PAGE_RESET_PASSWORD_BUTTON = "//span[text()='Reajusta tu Cuenta']"
 FORGOT_PAGE_SUCCESS_RESET_MESSAGE = "//p[contains(text(),'El enlace se envió a su correo electrónico permiti')]"
 
 # Valid login
-ADMIN_LOGIN = "v.litvinenko+admin@geniusee.com"
+ADMIN_LOGIN = "v.litvinenko+enfermera@geniusee.com"
 ADMIN_PASSWORD = "12341234"
 
 TECHLAB_LOGIN = "v.litvinenko+techlab@geniusee.com"

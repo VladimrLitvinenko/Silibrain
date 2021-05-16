@@ -1,4 +1,6 @@
 import logging
+import time
+
 from selenium.webdriver.common.by import By
 from pages.baseClass import BaseTest
 from constants import login_constants, profile_constants
@@ -30,6 +32,7 @@ class TestUserProfilePage(BaseTest):
         profile_page_obj.click_edit_button()
 
         """Clear all editable fields"""
+        time.sleep(2)
         self.driver.find_element(By.XPATH, value=profile_constants.PROFILE_FIRST_NAME_FIELD).clear()
         self.driver.find_element(By.XPATH, value=profile_constants.PROFILE_LAST_NAME_FIELD).clear()
         self.driver.find_element(By.XPATH, value=profile_constants.PROFILE_PHONE_NUMBER_FIELD).clear()
