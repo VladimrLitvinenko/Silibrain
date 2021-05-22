@@ -5,7 +5,14 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from constants import login_constants
 from pages.login_page import LoginPage
+from test_data.users_data import UsersData
 
+
+@pytest.fixture(scope="class")
+def login_as_admin():
+    print("I will be executed first")
+    yield
+    print("I will be executed as last")
 
 def pytest_runtest_setup(item):
     """prepare test"""
@@ -22,7 +29,6 @@ def pytest_addoption(parser):
     )
 
 @pytest.fixture(scope="function")
-
 def setup(request):
     """
     Теперь если мы можем запускать комманду с наимнованием нужного нам браузера для рана:
