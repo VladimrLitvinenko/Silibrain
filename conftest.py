@@ -4,9 +4,9 @@ import pytest
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from constants import login_constants
+from pages.baseClass import AdminUser
 from pages.login_page import LoginPage
 from test_data.users_data import UsersData
-
 
 @pytest.fixture(scope="class")
 def login_as_admin():
@@ -14,10 +14,12 @@ def login_as_admin():
     yield
     print("I will be executed as last")
 
+
 def pytest_runtest_setup(item):
     """prepare test"""
     log = logging.getLogger(item.name)
     item.cls.logger = log
+
 
 def pytest_addoption(parser):
     """
@@ -27,6 +29,7 @@ def pytest_addoption(parser):
     parser.addoption(
         "--browser_name", action="store", default="chrome"
     )
+
 
 @pytest.fixture(scope="function")
 def setup(request):
@@ -54,3 +57,15 @@ def setup(request):
 
     yield login_page_obj
     driver.close()
+
+
+@pytest.fixture(scope="function")
+def login_as_admin(setup):
+    login_page_obj = LoginPage(setup)
+    # call User class with user data
+    admin_user_obj = AdminUser(email=UsersData.ADMIN_LOGIN, password=UsersData.ADMIN_PASSWORD)
+    # enter valid login and password
+    login_page_obj.fill_login_fields(email=UsersData.ADMIN_LOGIN, password=UsersData.ADMIN_PASSWORD)
+    # Verify the email is displayed on the page
+    login_page_obj.verify_success_login(email=UsersData.ADMIN_LOGIN.lower())
+    return admin_user_obj

@@ -81,3 +81,11 @@ class BaseTest:
     #     logging.error("Test case failed")
     #     logger.critical("Critical issue")
     #     return logger
+
+
+"""создали юзера который принимает и сохранет в себя данные параметры"""
+
+class AdminUser:
+    def __init__(self, password, email):
+        self.password = password
+        self.email = email

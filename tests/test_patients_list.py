@@ -3,12 +3,13 @@ import random
 
 import pytest
 from selenium.webdriver.common.by import By
-from pages.baseClass import BaseTest
+from pages.baseClass import BaseTest, AdminUser
 from constants import login_constants, profile_constants, patient_list_constant, pages_menu_constant
 from pages.login_page import LoginPage
 from pages.patient_list_page import PatientsListPage
 from pages.profile_page import ProfilePage
 from test_data.patients_data import PatientData
+from test_data.users_data import UsersData
 
 
 class TestPatients(BaseTest):
@@ -18,11 +19,16 @@ class TestPatients(BaseTest):
     def get_patient_data(self, request):
         return request.param
 
-    @pytest.fixture
+    @pytest.fixture(scope="function")
     def login_as_admin(self):
         login_page_obj = LoginPage(self.driver)
-        login_page_obj.login_as_admin()
-        self.logger.info("user is logged is as admin")
+        # call User class with user data
+        admin_user_obj = AdminUser(email=UsersData.ADMIN_LOGIN, password=UsersData.ADMIN_PASSWORD)
+        # enter valid login and password
+        login_page_obj.fill_login_fields(email=UsersData.ADMIN_LOGIN, password=UsersData.ADMIN_PASSWORD)
+        # Verify the email is displayed on the page
+        login_page_obj.verify_success_login(email=UsersData.ADMIN_LOGIN.lower())
+        return admin_user_obj
 
     def test_patient_is_searchable(self, get_patient_data, login_as_admin):
         """Go to the patient creation overlay"""
