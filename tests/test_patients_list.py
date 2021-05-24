@@ -57,7 +57,8 @@ class TestPatients(BaseTest):
         count_of_patients_after_patient_creation = patient_list_obj.count_of_patients()
         """Verify count of patient is increased to 1"""
         assert count_of_patients_after_patient_creation == count_of_patients_before_patient_creation + 1
-        self.logger.info(f"count of patient actual: {count_of_patients_before_patient_creation + 1} expected: {count_of_patients_after_patient_creation}")
+        self.logger.info(
+            f"count of patient actual: {count_of_patients_before_patient_creation + 1} expected: {count_of_patients_after_patient_creation}")
 
     def test_verify_patient_is_removed_by_admin(self, get_patient_data, login_as_admin):
         """Go to the patient creation overlay"""
@@ -73,6 +74,5 @@ class TestPatients(BaseTest):
         patient_list_obj.open_created_patient_displayed_on_list(get_patient_data["first_name"])
         self.logger.info("Patient is opened")
         """remove the patient"""
-        remove_patient_button = self.driver.find_element(By.XPATH, value= patient_profile_constant.REMOVE_PATIENT_XPATH)
+        remove_patient_button = self.driver.find_element(By.XPATH, value=patient_profile_constant.REMOVE_PATIENT_XPATH)
         remove_patient_button.click()
-
