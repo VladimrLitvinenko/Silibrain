@@ -1,0 +1,1 @@
+REMOVE_PATIENT_XPATH = "//span[@class='MuiButton-label']/parent::button/parent::div/button[2]"

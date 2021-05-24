@@ -72,6 +72,7 @@ class PatientsListPage(BaseTest):
         self.open_patient_list_page()
         """Click 'create patient' button"""
         self.click_create_patient_button()
+        time.sleep(1)
 
     def create_valid_patient_with_unique_firstname(self, first_name, last_name, email, phone, payment_option):
         self.fill_unique_first_name_field(first_name)
@@ -87,3 +88,31 @@ class PatientsListPage(BaseTest):
         get_search_box.send_keys(first_name)
         self.logger.debug(f"{first_name} of patient is entered into the searchbox")
         time.sleep(2)
+
+    def count_of_patients(self):
+        pagination_element = self.driver.find_element(By.XPATH, value="//div[@class='MuiTablePagination-root']/div/p[2]").text
+        self.logger.debug(f"pagination element shows the following info = {pagination_element} and split = {pagination_element.split()}")
+        count_of_patients = pagination_element.split()
+        self.logger.debug(f"count of patients = {count_of_patients[2]}")
+        return int(count_of_patients[2])
+
+    def open_created_patient_displayed_on_list(self, patient_first_name):
+        list_of_patients = self.driver.find_elements(By.XPATH, value=patient_list_constant.LIST_OF_PATIENTS_FIRSTMAMES_XPATH)
+        for each_patient in list_of_patients:
+            if each_patient.text == patient_first_name:
+                each_patient.click()
+                time.sleep(2)
+                self.logger.debug(f"created patient is opened")
+                break
+
+    def verify_removed_patient_is_not_displayed_on_list(self, patient_first_name):
+        list_of_patients = self.driver.find_elements(By.XPATH, value=patient_list_constant.LIST_OF_PATIENTS_FIRSTMAMES_XPATH)
+        for each_patient in list_of_patients:
+            if each_patient.text != patient_first_name:
+                self.logger.debug(f" {patient_first_name} is removed")
+                assert patient_first_name == ""
+
+
+
+
+

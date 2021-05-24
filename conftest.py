@@ -45,7 +45,7 @@ def setup(request):
         driver = webdriver.Firefox(executable_path="/home/ihor/PycharmProjects/Silibrain/driver/geckodriver")
     # Open start page
     driver.get(login_constants.STAGE_BASE_URL)
-    driver.implicitly_wait(time_to_wait=20)
+    driver.implicitly_wait(time_to_wait=5)
     login_page_obj = LoginPage(driver)
     driver.maximize_window()
     # click ingressa button
@@ -61,11 +61,9 @@ def setup(request):
 
 @pytest.fixture(scope="function")
 def login_as_admin(setup):
-    login_page_obj = LoginPage(setup)
-    # call User class with user data
     admin_user_obj = AdminUser(email=UsersData.ADMIN_LOGIN, password=UsersData.ADMIN_PASSWORD)
     # enter valid login and password
-    login_page_obj.fill_login_fields(email=UsersData.ADMIN_LOGIN, password=UsersData.ADMIN_PASSWORD)
+    setup.fill_login_fields(email=UsersData.ADMIN_LOGIN, password=UsersData.ADMIN_PASSWORD)
     # Verify the email is displayed on the page
-    login_page_obj.verify_success_login(email=UsersData.ADMIN_LOGIN.lower())
+    setup.verify_success_login(email=UsersData.ADMIN_LOGIN.lower())
     return admin_user_obj
