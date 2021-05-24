@@ -1,1 +1,1 @@
-REMOVE_PATIENT_XPATH = "//div[@class='MuiBox-root jss128']/button[2]"
+REMOVE_PATIENT_XPATH = "//span[@class='MuiButton-label']/parent::button/parent::div/button[2]"

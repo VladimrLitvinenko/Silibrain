@@ -22,6 +22,7 @@ class TestPatients(BaseTest):
     def get_patient_data(self, request):
         return request.param
 
+
     def test_patient_is_searchable(self, get_patient_data, login_as_admin):
         """Go to the patient creation overlay"""
         patient_list_obj = PatientsListPage(self.driver)
@@ -34,6 +35,8 @@ class TestPatients(BaseTest):
                                                                     get_patient_data["email"],
                                                                     get_patient_data["phone"],
                                                                     patient_list_constant.PAYMENT_COEX_OPTION_XPATH)
+        self.logger.info("Unique Patient is created")
+
         """enter valid patient first name into searchbox"""
         patient_list_obj.search_created_patient(get_patient_data['first_name'])
         self.logger.info("firstname of patient is entered into the searchbox")
@@ -46,15 +49,24 @@ class TestPatients(BaseTest):
         """Go to the patient creation overlay"""
         patient_list_obj = PatientsListPage(self.driver)
         patient_list_obj.open_patient_overlay()
+        self.logger.info("Patient overlay is clicked to be opened")
+
         """Get previous count of patients"""
         count_of_patients_before_patient_creation = patient_list_obj.count_of_patients()
+        self.logger.info(f"Previous count of patients is displayed and = {count_of_patients_before_patient_creation}")
+
         """Create patient with valid email and unique first name"""
         patient_list_obj.create_valid_patient_with_unique_firstname(get_patient_data["first_name"],
                                                                     get_patient_data["last_name"],
                                                                     get_patient_data["email"],
                                                                     get_patient_data["phone"],
                                                                     patient_list_constant.PAYMENT_COEX_OPTION_XPATH)
+        self.logger.info("Unique Patient is created")
+
+        """Get current count of patients"""
         count_of_patients_after_patient_creation = patient_list_obj.count_of_patients()
+        self.logger.info(f"Previous count of patients is displayed and = {count_of_patients_before_patient_creation}")
+
         """Verify count of patient is increased to 1"""
         assert count_of_patients_after_patient_creation == count_of_patients_before_patient_creation + 1
         self.logger.info(
@@ -64,6 +76,8 @@ class TestPatients(BaseTest):
         """Go to the patient creation overlay"""
         patient_list_obj = PatientsListPage(self.driver)
         patient_list_obj.open_patient_overlay()
+        self.logger.info("Patient overlay is clicked to be opened")
+
         """Create patient with valid email and unique first name"""
         patient_list_obj.create_valid_patient_with_unique_firstname(get_patient_data["first_name"],
                                                                     get_patient_data["last_name"],
@@ -72,7 +86,34 @@ class TestPatients(BaseTest):
                                                                     patient_list_constant.PAYMENT_COEX_OPTION_XPATH)
         """open created patient"""
         patient_list_obj.open_created_patient_displayed_on_list(get_patient_data["first_name"])
-        self.logger.info("Patient is opened")
-        """remove the patient"""
+        self.logger.info("Patient profile is opened")
+
+        """click remove button to remove the patient"""
         remove_patient_button = self.driver.find_element(By.XPATH, value=patient_profile_constant.REMOVE_PATIENT_XPATH)
         remove_patient_button.click()
+        self.logger.info("remove button is clicked")
+
+        """Input removed patient name into search"""
+        patient_list_obj.search_created_patient(get_patient_data['first_name'])
+        self.logger.info(f"firstname {get_patient_data['first_name']} of patient is entered into the searchbox")
+
+        patient_list_obj.verify_removed_patient_is_not_displayed_on_list(get_patient_data['first_name'])
+        self.logger.info("firstname of patient is not displayed")
+
+    # def test_patient_count_of_patients_decreased_after_removing(self, get_patient_data, login_as_admin):
+    #     """Go to the patient creation overlay"""
+    #     patient_list_obj = PatientsListPage(self.driver)
+    #     patient_list_obj.open_patient_overlay()
+    #     """Create patient with valid email and unique first name"""
+    #     patient_list_obj.create_valid_patient_with_unique_firstname(get_patient_data["first_name"],
+    #                                                                 get_patient_data["last_name"],
+    #                                                                 get_patient_data["email"],
+    #                                                                 get_patient_data["phone"],
+    #                                                                 patient_list_constant.PAYMENT_COEX_OPTION_XPATH)
+    #     """open created patient"""
+    #     patient_list_obj.open_created_patient_displayed_on_list(get_patient_data["first_name"])
+    #     self.logger.info("Patient is opened")
+    #     """remove the patient"""
+    #     remove_patient_button = self.driver.find_element(By.XPATH, value=patient_profile_constant.REMOVE_PATIENT_XPATH)
+    #     remove_patient_button.click()
+

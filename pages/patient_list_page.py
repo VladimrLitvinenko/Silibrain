@@ -102,5 +102,17 @@ class PatientsListPage(BaseTest):
             if each_patient.text == patient_first_name:
                 each_patient.click()
                 time.sleep(2)
-                self.logger.debug(f"expected {patient_first_name} actual result {each_patient.text}")
-                assert patient_first_name == each_patient.text
+                self.logger.debug(f"created patient is opened")
+                break
+
+    def verify_removed_patient_is_not_displayed_on_list(self, patient_first_name):
+        list_of_patients = self.driver.find_elements(By.XPATH, value=patient_list_constant.LIST_OF_PATIENTS_FIRSTMAMES_XPATH)
+        for each_patient in list_of_patients:
+            if each_patient.text != patient_first_name:
+                self.logger.debug(f" {patient_first_name} is removed")
+                assert patient_first_name == ""
+
+
+
+
+
