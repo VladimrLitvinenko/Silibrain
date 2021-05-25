@@ -90,7 +90,6 @@ class TestPatients(BaseTest):
         self.logger.info(f"Patient is created")
 
         """Get count of patients after patient is created"""
-        time.sleep(2)
         count_of_patients_after_patient_is_created = patient_list_obj.count_of_patients()
         self.logger.info(f"count of patients after patient is created = {count_of_patients_after_patient_is_created}")
 
@@ -104,7 +103,6 @@ class TestPatients(BaseTest):
         self.logger.info("remove button is clicked")
 
         """Get  count of patients after the patient is removed"""
-        time.sleep(2)
         count_of_patients_after_patient_is_removed = patient_list_obj.count_of_patients()
         self.logger.info(f"count of patients after the patient is removed = {count_of_patients_after_patient_is_removed}")
 
