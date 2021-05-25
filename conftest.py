@@ -45,7 +45,7 @@ def setup(request):
         driver = webdriver.Firefox(executable_path="/home/ihor/PycharmProjects/Silibrain/driver/geckodriver")
     # Open start page
     driver.get(login_constants.STAGE_BASE_URL)
-    driver.implicitly_wait(time_to_wait=5)
+    driver.implicitly_wait(time_to_wait=10)
     login_page_obj = LoginPage(driver)
     driver.maximize_window()
     # click ingressa button
