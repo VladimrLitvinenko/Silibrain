@@ -119,7 +119,7 @@ class TestPatients(BaseTest):
 
         """Verify the removed user is not found"""
         patient_list_obj.verify_removed_patient_is_not_displayed_on_list(get_patient_data['first_name'])
-        self.logger.info("firstname of patient is not displayed")
+        self.logger.info("firstname of patient is not displayed ")
 
 
 
