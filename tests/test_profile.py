@@ -4,14 +4,13 @@ import time
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 
-from pages.baseClass import BaseTest
 from constants import login_constants, profile_constants
 from pages.login_page import LoginPage
 from pages.profile_page import ProfilePage
 from test_data.users_data import UsersData
 
 
-class TestUserProfilePage(BaseTest):
+class TestUserProfilePage:
     """Test for user profile page"""
 
 

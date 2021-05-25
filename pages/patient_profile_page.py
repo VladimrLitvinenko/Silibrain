@@ -3,12 +3,12 @@ import logging
 from selenium.webdriver.common.by import By
 
 from constants import patient_profile_constant
-from pages.baseClass import BaseTest
+from pages.baseClass import BasePage
 
 
-class PatientProfilePage(BaseTest):
+class PatientProfilePage(BasePage):
     def __init__(self, driver):
-        self.driver = driver
+        super().__init__(driver)
         self.logger = logging.getLogger(__name__)
 
     def click_remove_button(self):

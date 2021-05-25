@@ -2,13 +2,12 @@
 import pytest
 
 from constants import login_constants
-from pages.baseClass import BaseTest
 from pages.login_page import LoginPage
 from test_data import users_data
 from test_data.users_data import UsersData
 
 
-class TestStartPage(BaseTest):
+class TestStartPage():
     """Test for start page"""
 
     @pytest.fixture(params=UsersData.INVALID_USER_RESTRICTIONS)

@@ -4,13 +4,13 @@ import pytest
 from selenium.webdriver.common.by import By
 
 from constants import login_constants
-from pages.baseClass import BaseTest
+from pages.baseClass import BasePage
 from test_data.users_data import UsersData
 
 """Для всего класса теперь будет действовать setup fixture"""
 
 
-class LoginPage(BaseTest):
+class LoginPage(BasePage):
     def __init__(self, driver):
         self.driver = driver
         self.logger = logging.getLogger(__name__)

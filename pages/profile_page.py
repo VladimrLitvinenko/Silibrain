@@ -6,15 +6,15 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 
 from constants import login_constants, profile_constants
-from pages.baseClass import BaseTest
+from pages.baseClass import  BasePage
 from pages.login_page import LoginPage
 
 """Для всего класса теперь будет действовать setup fixture"""
 
 
-class ProfilePage(BaseTest):
+class ProfilePage(BasePage):
     def __init__(self, driver):
-        self.driver = driver
+        super().__init__(driver)
         self.logger = logging.getLogger(__name__)
 
     def verify_all_fields_are_disabled_by_default(self):

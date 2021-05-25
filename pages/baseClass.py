@@ -3,14 +3,18 @@ import logging
 import random
 
 import pytest
+from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 
 @pytest.mark.usefixtures("setup")
-class BaseTest:
-    """создали метод на основании Explicit Wait который можем вызывать дабы проверять отображается ли определенный
+class BasePage:
+    def __init__(self, driver: webdriver.Chrome):
+        self.driver = driver
+        self.wait = WebDriverWait(self.driver, timeout=10)
+    """создали методы на основании Explicit Wait который можем вызывать дабы проверять отображается ли определенный
     текст """
     logger = logging.getLogger(__name__)
 
