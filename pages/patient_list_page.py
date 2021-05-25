@@ -90,6 +90,7 @@ class PatientsListPage(BaseTest):
         time.sleep(2)
 
     def count_of_patients(self):
+        time.sleep(2)
         pagination_element = self.driver.find_element(By.XPATH, value="//div[@class='MuiTablePagination-root']/div/p[2]").text
         self.logger.debug(f"pagination element shows the following info = {pagination_element} and split = {pagination_element.split()}")
         count_of_patients = pagination_element.split()
