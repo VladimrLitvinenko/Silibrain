@@ -15,7 +15,7 @@ class TestUserProfilePage:
 
 
 
-    def test_fields_are_edited(self):
+    def test_fields_are_edited(self, setup):
         """Login as admin"""
         login_page_obj = LoginPage(self.driver)
         login_page_obj.login_as_admin()

@@ -8,11 +8,7 @@ from pages.baseClass import AdminUser
 from pages.login_page import LoginPage
 from test_data.users_data import UsersData
 
-@pytest.fixture(scope="class")
-def login_as_admin():
-    print("I will be executed first")
-    yield
-    print("I will be executed as last")
+
 
 
 def pytest_runtest_setup(item):

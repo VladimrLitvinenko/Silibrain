@@ -12,7 +12,7 @@ from test_data.users_data import UsersData
 
 class LoginPage(BasePage):
     def __init__(self, driver):
-        self.driver = driver
+        super().__init__(driver)
         self.logger = logging.getLogger(__name__)
 
     def fill_login_fields(self, email, password):

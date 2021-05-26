@@ -6,7 +6,7 @@ from pages.login_page import LoginPage
 from test_data import users_data
 from test_data.users_data import UsersData
 
-
+@pytest.mark.usefixtures("setup")
 class TestStartPage():
     """Test for start page"""
 
@@ -57,7 +57,7 @@ class TestStartPage():
         # get error message
         login_page_obj.error_message_invalid_forgot_email()
 
-    def test_valid_reset_of_user(self,):
+    def test_valid_reset_of_user(self):
         login_page_obj = LoginPage(self.driver)
         # click forgot password link
         login_page_obj.verify_forgot_password_page_is_opened()
