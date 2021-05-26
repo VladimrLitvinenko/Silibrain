@@ -1,0 +1,1 @@
+LEVE_SELLECTION_WIHIN_CASE_XPATH = "//ul/li[text()='Leve']"
