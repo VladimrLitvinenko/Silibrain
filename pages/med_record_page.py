@@ -44,3 +44,6 @@ class MedRecordPage(BasePage):
     def open_newly_created_med_record(self):
         open_med_record_button = self.wait_until_click(By.XPATH, locator="//span[contains(text(),'Ver récord médico')]")
         open_med_record_button.click()
+
+    def verify_name_of_med_record_placeholder(self):
+        self.wait_for_text(locator_type=By.XPATH, locator="//label[text()='Fecha (Nombre del Documento)']", text= 'Fecha (Nombre del Documento)')

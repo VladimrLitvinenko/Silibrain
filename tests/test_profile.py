@@ -1,6 +1,7 @@
 import logging
 import time
 
+import pytest
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 
@@ -9,7 +10,7 @@ from pages.login_page import LoginPage
 from pages.profile_page import ProfilePage
 from test_data.users_data import UsersData
 
-
+@pytest.mark.usefixtures("setup")
 class TestUserProfilePage:
     """Test for user profile page"""
 
@@ -17,8 +18,7 @@ class TestUserProfilePage:
 
     def test_fields_are_edited(self, setup):
         """Login as admin"""
-        login_page_obj = LoginPage(self.driver)
-        login_page_obj.login_as_admin()
+        setup.login_as_admin()
 
         """Click EDIT button in the profile"""
         profile_page_obj = ProfilePage(self.driver)    # def test_all_fields_are_disabled_by_default(self):

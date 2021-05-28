@@ -14,6 +14,7 @@ class BasePage:
     def __init__(self, driver: webdriver.Chrome):
         self.driver = driver
         self.wait = WebDriverWait(self.driver, timeout=10)
+
     """создали методы на основании Explicit Wait который можем вызывать дабы проверять отображается ли определенный
     текст """
     logger = logging.getLogger(__name__)
@@ -88,6 +89,7 @@ class BasePage:
 
 
 """создали юзера который принимает и сохранет в себя данные параметры"""
+
 
 class AdminUser:
     def __init__(self, password, email):
