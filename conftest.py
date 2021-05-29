@@ -71,29 +71,19 @@ def login_as_admin(setup):
 def get_patient_data(request):
     return request.param
 
+
 @pytest.fixture(scope="function")
 def create_patient(setup, login_as_admin, get_patient_data):
-    patient_page_obj = PatientsListPage(login_as_admin)
+    patient_page_obj = PatientsListPage(setup.driver)
     patient_page_obj.open_patient_list_page()
     patient_page_obj.open_patient_overlay()
     patient_page_obj.create_valid_patient_with_unique_firstname(get_patient_data["first_name"],
-                                                                    get_patient_data["last_name"],
-                                                                    get_patient_data["email"],
-                                                                    get_patient_data["phone"],
-                                                                    patient_list_constant.PAYMENT_COEX_OPTION_XPATH)
+                                                                get_patient_data["last_name"],
+                                                                get_patient_data["email"],
+                                                                get_patient_data["phone"],
+                                                                patient_list_constant.PAYMENT_COEX_OPTION_XPATH)
     patient_page_obj.open_created_patient_displayed_on_list(get_patient_data["first_name"])
-    return patient_page_obj
+    yield patient_page_obj
 
 
-# @pytest.fixture(scope="function")
-# def create_patient( login_as_admin, get_patient_data):
-#     patient_page_obj = PatientsListPage(driver)
-#     patient_page_obj.open_patient_list_page()
-#     patient_page_obj.open_patient_overlay()
-#     patient_page_obj.create_valid_patient_with_unique_firstname(get_patient_data["first_name"],
-#                                                                 get_patient_data["last_name"],
-#                                                                 get_patient_data["email"],
-#                                                                 get_patient_data["phone"],
-#                                                                 patient_list_constant.PAYMENT_COEX_OPTION_XPATH)
-#     patient_page_obj.open_created_patient_displayed_on_list(get_patient_data["first_name"])
-#     yield patient_page_obj
+

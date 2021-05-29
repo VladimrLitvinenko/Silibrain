@@ -8,6 +8,8 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
+from test_data.base_input_text import TEXT_INPUT_ENG
+
 
 @pytest.mark.usefixtures("setup")
 class BasePage:
@@ -95,3 +97,18 @@ class AdminUser:
     def __init__(self, password, email):
         self.password = password
         self.email = email
+
+
+def generate_random_text(word_count=3):
+    # word_count=3 - это сколько по дефолту будет слов
+    """Generate random text based on input text
+     - Вначале реплейсим все энтер на пустую строку
+     - раскладываем текст на множество с помощью сплита убираем пробелы
+     - итого получаем массив слов"""
+    input_text_lst = TEXT_INPUT_ENG.replace("\n", "").split(" ")
+    generatet_text = []
+    generatet_text_lst = []
+    for _ in range(word_count):
+        generatet_text_lst.append(random.choice(input_text_lst))
+        generatet_text = ' '.join(generatet_text_lst)
+    return generatet_text

@@ -52,10 +52,13 @@ class TestStartPage():
         login_page_obj = LoginPage(self.driver)
         # click forgot password link
         login_page_obj.verify_forgot_password_page_is_opened()
+        self.logger.info("Click the forgot password link is clicked")
         # enter invalid mail into forgot mail field and click reset button
         login_page_obj.fill_forgot_section_fields(email=get_invalid_Data["invalid_login"])
+        self.logger.info("fields are entered within forgot password section")
         # get error message
         login_page_obj.error_message_invalid_forgot_email()
+        self.logger.info("Error message of invalid password is verified")
 
     def test_valid_reset_of_user(self):
         login_page_obj = LoginPage(self.driver)
