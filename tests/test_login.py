@@ -64,10 +64,13 @@ class TestStartPage():
         login_page_obj = LoginPage(self.driver)
         # click forgot password link
         login_page_obj.verify_forgot_password_page_is_opened()
+        self.logger.info("Forgot password is opened")
         # enter valid mail into forgot mail field and click RESET button
         login_page_obj.fill_forgot_section_fields(email=UsersData.ADMIN_LOGIN)
+        self.logger.info(f"Enter valid email into reset email field= {UsersData.ADMIN_LOGIN}")
         # get success message
         login_page_obj.verify_password_is_reset()
+        self.logger.info(f"Reset Password text is verified")
 
     def test_upper_case_login(self):
         login_page_obj = LoginPage(self.driver)
