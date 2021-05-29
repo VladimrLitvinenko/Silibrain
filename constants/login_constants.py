@@ -5,7 +5,7 @@ FORGOT_PAGE_SUCCESS_RESET_MESSAGE_TEXT = 'El enlace se envió a su correo electr
 INVALID_EMAIL_TEXT = 'Usuario no encontrado'
 INVALID_PASSWORD_TEXT = 'Credenciales no validas'
 SUCCESS_RESSET_PASSWORD_TEXT = 'El enlace se envió a su correo electrónico permitiendo configurar su contraseña'
-
+EMPTY_FIELD_VALIDATION_MESSAGE = "Please fill out this field."
 # BUTTONS
 INGRESSA_BUTTON_LOGIN_PAGE = "//span[text()='Ingresa']"
 

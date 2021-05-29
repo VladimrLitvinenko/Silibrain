@@ -1,4 +1,5 @@
 import logging
+import time
 
 import pytest
 from selenium.webdriver.common.by import By
@@ -79,3 +80,16 @@ class LoginPage(BasePage):
     def login_as_admin(self):
         self.fill_valid_user_data(email=UsersData.ADMIN_LOGIN, password=UsersData.ADMIN_PASSWORD)
         self.logger.debug("user is logged is as admin")
+
+    def verify_empty_email_field_validation(self):
+        field = self.driver.find_element(by=By.XPATH, value=login_constants.LOGIN_EMAIL_INPUT_FIELD_XPATH)
+        """get_attribute("validationMessage") is special methid that verify if pop up with empty text validation is dispalyed"""
+        assert field.get_attribute("validationMessage") == login_constants.EMPTY_FIELD_VALIDATION_MESSAGE
+        self.logger.debug(f"{login_constants.EMPTY_FIELD_VALIDATION_MESSAGE} empty message validation is dispalyed and verified for email")
+
+    def verify_empty_password_field_validation(self):
+        field = self.wait_until_find(By.XPATH, login_constants.LOGIN_PASSWORD_INPUT_FIELD_XPATH)
+        """get_attribute("validationMessage") is special methid that verify if pop up with empty text validation is dispalyed"""
+        assert field.get_attribute("validationMessage") == login_constants.EMPTY_FIELD_VALIDATION_MESSAGE
+        self.logger.debug(
+            f"{login_constants.EMPTY_FIELD_VALIDATION_MESSAGE} empty message validation is dispalyed and verified for password")

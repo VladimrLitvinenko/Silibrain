@@ -1,5 +1,6 @@
 """Start Page tests"""
 import pytest
+from selenium.webdriver.common.by import By
 
 from constants import login_constants
 from pages.login_page import LoginPage
@@ -13,6 +14,19 @@ class TestStartPage():
     @pytest.fixture(params=UsersData.INVALID_USER_RESTRICTIONS)
     def get_invalid_Data(self, request):
         return request.param
+
+    def test_error_messages_if_fields_are_empty(self):
+        """Verify that pop up with empty validation test is appeared"""
+        login_page_obj = LoginPage(self.driver)
+        login_page_obj.fill_login_fields(email="", password="any data")
+        login_page_obj.verify_empty_email_field_validation()
+        self.logger.info("empty email message is displayed and verified")
+
+    def test_error_messages_if_password_field_empty(self):
+        login_page_obj = LoginPage(self.driver)
+        login_page_obj.fill_login_fields(email="any data", password="")
+        login_page_obj.verify_empty_password_field_validation()
+        self.logger.info("empty password message is displayed and verified")
 
     def test_invalid_login(self, get_invalid_Data):
         login_page_obj = LoginPage(self.driver)
@@ -81,3 +95,6 @@ class TestStartPage():
         # Verify the email is displayed on the page
         login_page_obj.verify_success_login(email=UsersData.ADMIN_LOGIN.lower())
         self.logger.info("Valid email is logged in and verified")
+
+
+
