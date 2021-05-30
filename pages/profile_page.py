@@ -68,6 +68,12 @@ class ProfilePage(BasePage):
         assert len(all_disabled_fields_lst) == len(all_exist_fields_lst)
         self.logger.debug(F"Count of disabled fields by default = {len(all_disabled_fields_lst)}  and equal to count of all exist fields {len(all_exist_fields_lst)}")
 
+    def verify_logo_is_displayed(self):
+        self.wait_until_find(locator_type=By.XPATH, locator="//img[@alt='Hospital Privado']")
+        self.verify_element_images(locator_type=By.XPATH, locator="//img[@alt='Hospital Privado']", expected_image_path="../resourses/images/logo_image.png")
+
+
+
 
 
 

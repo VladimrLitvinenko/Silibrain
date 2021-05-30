@@ -93,3 +93,7 @@ class LoginPage(BasePage):
         assert field.get_attribute("validationMessage") == login_constants.EMPTY_FIELD_VALIDATION_MESSAGE
         self.logger.debug(
             f"{login_constants.EMPTY_FIELD_VALIDATION_MESSAGE} empty message validation is dispalyed and verified for password")
+
+    def test_sc(self):
+        login_page_obj = LoginPage(self.driver)
+        login_page_obj.get_screen_shot(locator_type=By.XPATH, locator=login_constants.LOGIN_EMAIL_INPUT_FIELD_XPATH)

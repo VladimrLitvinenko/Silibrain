@@ -47,3 +47,9 @@ class TestUserProfilePage:
         profile_page_obj.verify_fields_are_disabled_by_default()
         self.logger.info("5 fields are read only by default")
 
+    def test_logo_is_displayed(self, login_as_admin):
+        """Verify the logo is displayed after the user is logged in"""
+        profile_page_obj = ProfilePage(self.driver)
+        profile_page_obj.verify_logo_is_displayed()
+        self.logger.info("logo is verified")
+

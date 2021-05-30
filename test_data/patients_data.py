@@ -10,6 +10,6 @@ class PatientData:
          "first_name": F"VLADIMIR{variety}",
          "last_name": "LENIN",
          "email": "879878@GMAIL.COM",
-         "phone": "123412341324,",
+         "phone": "123412341324",
          }
     ]

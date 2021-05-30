@@ -41,6 +41,8 @@ def setup(request):
         driver = webdriver.Chrome(executable_path="/home/ihor/PycharmProjects/Silibrain/driver/chromedriver")
     elif browser_name == "firefox":
         driver = webdriver.Firefox(executable_path="/home/ihor/PycharmProjects/Silibrain/driver/geckodriver")
+    else:
+        raise ValueError(f"Unknown browser {browser_name}")
     # Open start page
     driver.get(login_constants.STAGE_BASE_URL)
     driver.implicitly_wait(time_to_wait=10)
