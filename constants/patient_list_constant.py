@@ -1,7 +1,7 @@
 import random
 
 CREATE_PATIENT_BUTTON_XPATH = "//span[contains(text(),'Añadir nuevo paciente')]"
-CREATE_PATIENT_BUTTON_ON_POP_UP_XPATH = "//span[contains(text(),'Agregar')]"
+CREATE_PATIENT_BUTTON_ON_POP_UP_XPATH = "//span[text()='Agregar']"
 
 # CREATE PATIENT fields on the create patient overlay
 FIRST_NAME_FIELD_XPATH = "//div/input[@name='firstName']"

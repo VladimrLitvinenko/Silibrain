@@ -1,44 +1,55 @@
 import logging
 import time
 
+import pytest
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 
 from constants import login_constants, profile_constants
+from pages import baseClass
 from pages.login_page import LoginPage
 from pages.profile_page import ProfilePage
 from test_data.users_data import UsersData
 
 
+@pytest.mark.usefixtures("setup")
 class TestUserProfilePage:
     """Test for user profile page"""
 
-
-
-    def test_fields_are_edited(self, setup):
+    def test_fields_are_edited(self, login_as_admin):
         """Login as admin"""
-        login_page_obj = LoginPage(self.driver)
-        login_page_obj.login_as_admin()
+        profile_page_obj = ProfilePage(self.driver)
 
         """Click EDIT button in the profile"""
-        profile_page_obj = ProfilePage(self.driver)    # def test_all_fields_are_disabled_by_default(self):
-        """
-        - Login as admin
-        - verify the First name is disabled initially
-        """
         profile_page_obj.click_edit_button()
+        self.logger.info("Edit button is clicked")
+
+        """Generate first name and last name"""
+        first_name = baseClass.generate_random_text(1)
+        last_name = baseClass.generate_random_text(1)
 
         """Input FIRST NAME, LAST NAME, PHONE"""
-        profile_page_obj.input_text_into_fields(first_name=UsersData.FIRST_NAME_INPUT,last_name=UsersData.LAST_NAME_INPUT, phone=UsersData.PHONE_INPUT)
-        profile_page_obj.click_save_button(first_name=UsersData.FIRST_NAME_INPUT, last_name=UsersData.LAST_NAME_INPUT,  phone=UsersData.PHONE_INPUT)
+        profile_page_obj.input_text_into_fields(first_name=first_name, last_name=last_name, phone=UsersData.PHONE_INPUT)
+        self.logger.info(
+            f"first name= {first_name}  last name= {last_name}  phone= {UsersData.PHONE_INPUT} are entered")
 
-        #
-        # print(self.driver.find_element(By.XPATH, value=profile_constants.FIRST_NAME_INPUT).get_attribute("value"), "GGGG", profile_constants.FIRST_NAME_INPUT)
-        # assert self.driver.find_element(By.XPATH, value=profile_constants.FIRST_NAME_INPUT).get_attribute("value") == profile_constants.FIRST_NAME_INPUT
+        """Click SAVE button"""
+        profile_page_obj.click_save_button()
+        self.logger.info("SAVE button is clicked")
 
-    # def test_all_fields_are_not_required(self):
-    #     """
-    #     - clear all fields
-    #     - click save button
-    #     """
-    #     pass
+        profile_page_obj.verrify_the_fields_are_saved(first_name=first_name, last_name=last_name,
+                                                      phone=UsersData.PHONE_INPUT)
+        self.logger.info(
+            f"first name= {first_name}  last name= {last_name}  phone= {UsersData.PHONE_INPUT}  are verified")
+
+    def test_fields_are_disabled_by_default(self, setup , login_as_admin):
+        profile_page_obj = ProfilePage(self.driver)
+        profile_page_obj.verify_fields_are_disabled_by_default()
+        self.logger.info("5 fields are read only by default")
+
+    def test_logo_is_displayed(self, login_as_admin):
+        """Verify the logo is displayed after the user is logged in"""
+        profile_page_obj = ProfilePage(self.driver)
+        profile_page_obj.verify_logo_is_displayed()
+        self.logger.info("logo is verified")
+

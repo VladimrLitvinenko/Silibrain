@@ -3,12 +3,14 @@ import logging
 import pytest
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from constants import login_constants
+from constants import login_constants, patient_list_constant
 from pages.baseClass import AdminUser
 from pages.login_page import LoginPage
+from pages.med_record_page import MedRecordPage
+from pages.patient_case_tab_page import CaseTabPage
+from pages.patient_list_page import PatientsListPage
+from test_data.patients_data import PatientData
 from test_data.users_data import UsersData
-
-
 
 
 def pytest_runtest_setup(item):
@@ -39,6 +41,8 @@ def setup(request):
         driver = webdriver.Chrome(executable_path="/home/ihor/PycharmProjects/Silibrain/driver/chromedriver")
     elif browser_name == "firefox":
         driver = webdriver.Firefox(executable_path="/home/ihor/PycharmProjects/Silibrain/driver/geckodriver")
+    else:
+        raise ValueError(f"Unknown browser {browser_name}")
     # Open start page
     driver.get(login_constants.STAGE_BASE_URL)
     driver.implicitly_wait(time_to_wait=10)
@@ -63,3 +67,25 @@ def login_as_admin(setup):
     # Verify the email is displayed on the page
     setup.verify_success_login(email=UsersData.ADMIN_LOGIN.lower())
     return admin_user_obj
+
+"""Here valid test data for patient creation"""
+@pytest.fixture(params=PatientData.VALID_PATIENT_CREATION_DATA)
+def get_patient_data(request):
+    return request.param
+
+
+@pytest.fixture(scope="function")
+def create_patient(setup, login_as_admin, get_patient_data):
+    patient_page_obj = PatientsListPage(setup.driver)
+    patient_page_obj.open_patient_list_page()
+    patient_page_obj.open_patient_overlay()
+    patient_page_obj.create_valid_patient_with_unique_firstname(get_patient_data["first_name"],
+                                                                get_patient_data["last_name"],
+                                                                get_patient_data["email"],
+                                                                get_patient_data["phone"],
+                                                                patient_list_constant.PAYMENT_COEX_OPTION_XPATH)
+    patient_page_obj.open_created_patient_displayed_on_list(get_patient_data["first_name"])
+    yield patient_page_obj
+
+
+

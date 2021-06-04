@@ -14,7 +14,7 @@ from pages.profile_page import ProfilePage
 from test_data.patients_data import PatientData
 from test_data.users_data import UsersData
 
-
+@pytest.mark.usefixtures("setup")
 class TestPatients:
     """Here valid test data for patient creation"""
     @pytest.fixture(params=PatientData.VALID_PATIENT_CREATION_DATA)

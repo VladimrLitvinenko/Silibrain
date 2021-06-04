@@ -52,14 +52,13 @@ class PatientsListPage(BasePage):
 
 
     def click_create_on_patient_creation_overlay(self):
-        create_client_button_on_popup = self.driver.find_element(By.XPATH, value=patient_list_constant.CREATE_PATIENT_BUTTON_ON_POP_UP_XPATH)
-        create_client_button_on_popup.click()
+        self.wait_until_click(locator_type=By.XPATH, locator=patient_list_constant.CREATE_PATIENT_BUTTON_ON_POP_UP_XPATH)
         self.logger.debug("create patient button is clicked on the creation overlay")
 
     def verify_patient_is_displayed_on_list(self, patient_first_name):
         list_of_patients = self.driver.find_elements(By.XPATH, value=patient_list_constant.LIST_OF_PATIENTS_FIRSTMAMES_XPATH)
         for each_patient in list_of_patients:
-            if each_patient.text  == patient_first_name:
+            if each_patient.text == patient_first_name:
                 self.logger.debug(f"expected {patient_first_name} actual result {each_patient.text}")
                 assert patient_first_name == each_patient.text
 
@@ -80,8 +79,10 @@ class PatientsListPage(BasePage):
         time.sleep(6)
 
     def search_created_patient(self, first_name):
-        get_search_box = self.wait_until_find(By.XPATH, patient_list_constant.SEARCH_TEXTBOX)
-        get_search_box.send_keys(first_name)
+        self.wait_until_find(locator_type=By.XPATH, locator=patient_list_constant.SEARCH_TEXTBOX)
+        self.wait_until_send_keys(locator_type=By.XPATH, locator=patient_list_constant.SEARCH_TEXTBOX, data=first_name)
+        # get_search_box = self.wait_until_find(By.XPATH, patient_list_constant.SEARCH_TEXTBOX)
+        # get_search_box.send_keys(first_name)
         self.logger.debug(f"{first_name} of patient is entered into the searchbox")
         time.sleep(1)
 
