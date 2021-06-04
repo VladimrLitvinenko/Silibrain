@@ -5,7 +5,7 @@ from selenium.webdriver.common.by import By
 
 from constants import patient_list_constant
 from pages.med_record_page import MedRecordPage
-from pages.patient_case_tab import CaseTabPage
+from pages.patient_case_tab_page import CaseTabPage
 from pages.patient_list_page import PatientsListPage
 from test_data.patients_data import PatientData
 

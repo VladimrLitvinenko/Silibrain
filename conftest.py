@@ -7,7 +7,7 @@ from constants import login_constants, patient_list_constant
 from pages.baseClass import AdminUser
 from pages.login_page import LoginPage
 from pages.med_record_page import MedRecordPage
-from pages.patient_case_tab import CaseTabPage
+from pages.patient_case_tab_page import CaseTabPage
 from pages.patient_list_page import PatientsListPage
 from test_data.patients_data import PatientData
 from test_data.users_data import UsersData
