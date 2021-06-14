@@ -1,24 +1,13 @@
 """Case page tests"""
-import time
 
 import pytest
-from selenium.webdriver.common.by import By
 
-from constants import login_constants, case_constants, patient_list_constant
-from constants.case_constants import CASE_INITIAL_MESSAGE_MESSAGE
-from pages.login_page import LoginPage
-from pages.patient_case_tab_page import CaseTabPage
-from pages.patient_list_page import PatientsListPage
-from test_data import users_data
+from pages.patient_page.patient_case_tab_page import CaseTabPage
 from test_data.users_data import UsersData
 
 
 @pytest.mark.usefixtures("setup")
 class TestStartPage():
-
-    @pytest.fixture(params=UsersData.INVALID_USER_RESTRICTIONS)
-    def get_invalid_Data(self, request):
-        return request.param
 
     def test_empty_CASE_message_is_displayed(self, create_patient):
         """

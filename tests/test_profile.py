@@ -42,7 +42,7 @@ class TestUserProfilePage:
         self.logger.info(
             f"first name= {first_name}  last name= {last_name}  phone= {UsersData.PHONE_INPUT}  are verified")
 
-    def test_fields_are_disabled_by_default(self, setup , login_as_admin):
+    def test_fields_are_disabled_by_default(self, setup, login_as_admin):
         profile_page_obj = ProfilePage(self.driver)
         profile_page_obj.verify_fields_are_disabled_by_default()
         self.logger.info("5 fields are read only by default")
