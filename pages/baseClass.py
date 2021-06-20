@@ -158,3 +158,7 @@ def generate_random_text(word_count=3):
         generatet_text_lst.append(random.choice(input_text_lst))
         generatet_text = ' '.join(generatet_text_lst)
     return generatet_text
+
+
+def generate_random_numbers():
+    random_numbers = str(random.randint(100000, 9999999))

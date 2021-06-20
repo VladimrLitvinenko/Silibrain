@@ -16,6 +16,8 @@ CASE_BUDGET_DROP_DOWN_LIST_XPATH = "//div[@aria-labelledby='mui-component-select
 #Buttons
 CREATE_CASE_BUTTON_WITHIN_OVERLAY_XPATH = "//span[text() = 'Añadir']/parent::button"
 CASE_OPENING_BUTTON_XPATH = "//span[contains(text(),'Ver caso')]"
+CASE_REMOVE_BUTTON_XPATH = "//span[text()='Eliminar']"
+CASE_REMOVE_BUTTON_WITHIN_OVERLAY_XPATH = "//span[contains(text(),'Confirmar')]"
 
 # Drop down selection
 LEVE_CASE_BUDGET_ELEMENT_XPATH = "//ul[@role = 'listbox']/li[1]"
