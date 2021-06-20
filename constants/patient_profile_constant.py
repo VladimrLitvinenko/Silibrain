@@ -12,7 +12,7 @@ PATIENT_EMAIL_FIELD_XPATH = "//input[@name='email']"
 PATIENT_PHONE_FIELD_XPATH = "//input[@name='phone']"
 BUDGET_DROPDOWN_ELEMENTS = "//div[@class='MuiFormControl-root MuiTextField-root']"
 BUDGET_DROPDOWN_ELEMENT = "//ul[@role='listbox']/li"
-
+MEDICO_FIELD_XPATH = "//label[text()='Medico']/parent::div/div/input"
 # Statuses name
 PATIENT_NULL_STATUS = "NULL"
 PATIENT_PENDIENTE_STATUS = "Pendiente"

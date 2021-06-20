@@ -20,3 +20,5 @@ class UsersData:
     FIRST_NAME_INPUT = f"TestFirstName{variety}"
     LAST_NAME_INPUT = f"TestLastName{variety}"
     PHONE_INPUT = f"12345678{variety}"
+
+    MEDICO_NAME_SURNAME = "Medico Medico"

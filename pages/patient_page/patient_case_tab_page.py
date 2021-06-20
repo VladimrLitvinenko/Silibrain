@@ -102,7 +102,8 @@ class CaseTabPage(BasePage):
     def click_remove_case_button(self):
         self.wait_until_click(By.XPATH, case_constants.CASE_REMOVE_BUTTON_XPATH)
         self.wait_until_click(By.XPATH, case_constants.CASE_REMOVE_BUTTON_WITHIN_OVERLAY_XPATH)
-
+        self.logger.debug(
+            f" 'Remove case' button is clicked ")
 
 
 

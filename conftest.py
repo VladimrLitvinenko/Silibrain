@@ -6,6 +6,7 @@ from selenium.webdriver.common.by import By
 from constants import login_constants, patient_list_constant
 from pages.baseClass import AdminUser
 from pages.login_page import LoginPage
+from pages.patient_page.patient_case_tab_page import CaseTabPage
 from pages.patient_page.patient_list_page import PatientsListPage
 from test_data.patients_data import PatientData
 from test_data.users_data import UsersData
@@ -86,4 +87,9 @@ def create_patient(setup, login_as_admin, get_patient_data):
     yield patient_page_obj
 
 
-
+@pytest.fixture(scope="function")
+def create_case_as_admin(setup, create_patient):
+    case_page_obj = CaseTabPage(setup.driver)
+    case_page_obj.click_case_tab()
+    case_page_obj.create_case_with_default_date()
+    case_page_obj.open_newly_created_case()
