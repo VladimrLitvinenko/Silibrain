@@ -1,3 +1,4 @@
+import time
 import inspect
 import logging
 import os
@@ -162,3 +163,8 @@ def generate_random_text(word_count=3):
 
 def generate_random_numbers():
     random_numbers = str(random.randint(100000, 9999999))
+
+
+def current_time():
+    current = time.strftime('%d.%m.%Y')
+    return current
